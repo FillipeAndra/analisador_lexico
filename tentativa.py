@@ -124,6 +124,21 @@ def token(input_string):
     elif char == '!' and input_string[i+1] == '=':
       tokens.append((OPERADOR_DIFERENTE,char))
       i+=2
+    
+    elif char == '(':
+       tokens.append((ABRE_PARENTESES,char))
+
+    elif char == ')':
+       tokens.append((FECHA_PARENTESES,char))
+
+    elif char == '{':
+       tokens.append((ABRE_CHAVES))
+
+    elif char == '}':
+       tokens.append((FECHA_CHAVES,char))
+
+    elif char == '@':
+        tokens.append((ARROBA,char))
 
     #detores de palavas/ identificadores
     if char.isalpha():
