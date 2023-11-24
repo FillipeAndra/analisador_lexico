@@ -248,3 +248,7 @@ def token(input_string):
       i+=1
   
   return tokens
+
+tokens = token()
+for token_type, token_value in tokens:
+    print(f"{token_type}: {token_value}")
