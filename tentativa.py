@@ -134,14 +134,21 @@ def token(input_string):
         if '_' in alpha_str:
             tokens.append((IDENTIFICADOR,alpha_str))
 
-        elif alpha_str == 'setle':
-            tokens.append((SETLE,alpha_str))
+        elif '.' in alpha_str:
+           
+            if alpha_str.count('.') == 1 and alpha_str[0] == '.':
+                
+                if alpha_str == '.setle':
+                    tokens.append((SETLE,alpha_str))
 
-        elif alpha_str == 'kill':
-            tokens.append((KILL,alpha_str))
+                elif alpha_str == '.kill':
+                    tokens.append((KILL,alpha_str))
 
-        elif alpha_str == 'flask':
-            tokens.append((FLASK,alpha_str))
+                elif alpha_str == '.flask':
+                    tokens.append((FLASK,alpha_str))
+            else:
+                raise ValueError("Palavra reservada escrita errada: " + num_str)
+              
 
         elif alpha_str == 'besary':
             tokens.append((BESARY,alpha_str))
@@ -184,6 +191,39 @@ def token(input_string):
 
         elif alpha_str == 'rb':
            tokens.append((RB,alpha_str))
+
+        elif alpha_str == 'sign':
+           tokens.append((SIGN,alpha_str))
+        
+        elif alpha_str == 'gins':
+           tokens.append((GINS,alpha_str))
+
+        elif alpha_str == 'nawed':
+           tokens.append((NAWED,alpha_str))
+
+        elif alpha_str == 'neker':
+           tokens.append((NEKER,alpha_str))
+        
+        elif alpha_str == 'nekwar':
+           tokens.append((NEKWAR,alpha_str))
+           
+        elif alpha_str == 'int':
+           tokens.append((INT,alpha_str))
+
+        elif alpha_str == 'float':
+           tokens.append((FLOAT,alpha_str))
+
+        elif alpha_str == 'string':
+           tokens.append((STRING,alpha_str))
+
+        elif alpha_str == 'bool':
+           tokens.append((BOOL,alpha_str))
+
+        elif alpha_str == 'true':
+           tokens.append((TRUE,alpha_str))
+
+        elif alpha_str == 'false':
+           tokens.append((FALSE,alpha_str))
 
         else:
             tokens.append((IDENTIFICADOR,alpha_str))
