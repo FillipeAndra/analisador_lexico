@@ -75,71 +75,76 @@ def token(input_string):
         tokens.append((QUEN, string))
 
       elif alfa[0] == 'i':
-        if alfa[1:] == 'gni':
+        if alfa[1:] == ['g','n','i']:
           tokens.append((IGNI, string))
 
-        elif alfa[1:] == 'nt':
+        elif alfa[1:] == ['n','t']:
           tokens.append((INT, string))
 
-      elif alfa[0] == 'aard':
-        tokens.append((AARD, string))
-
-      elif alfa == 'yrden':
+      elif alfa[0] == 'a':
+        if alfa[1:] == ['a','r','d']:
+          tokens.append((AARD, string))
+          
+        elif alfa[1:] == ['a','b']:
+          tokens.append((AB, string))
+          
+        elif alfa[1:] == ['x','i','i']:
+          tokens.append((AXII, string))
+          
+        elif alfa[1:] == ['l','k','e','m','y']:
+          tokens.append((ALKEMY, string))
+          
+      elif alfa[0:] == ['y','r','d','e','n']:
         tokens.append((YRDEN, string))
 
-      elif alfa == 'axii':
-        tokens.append((AXII, string))
+      elif alfa[0] == 'p':
+        if alfa[1:] == ['o','t','i']:
+          tokens.append((POTI, string))
+        
+        elif alfa[1:] == ['o','p']:
+          tokens.append((POP, string))
 
-      elif alfa == 'alkemy':
-        tokens.append((ALKEMY, string))
-
-      elif alfa == 'poti':
-        tokens.append((POTI, string))
-
-      elif alfa == 'howi':
+      elif alfa[0:] == ['h','o','w','i']:
         tokens.append((HOWI, string))
 
-      elif alfa == 'pop':
-        tokens.append((POP, string))
-
-      elif alfa == 'journal':
+      elif alfa[0:] == ['j','o','u','r','n','a','l']:
         tokens.append((JOURNAL, string))
 
-      elif alfa == 'ab':
-        tokens.append((AB, string))
-
-      elif alfa == 'on':
+      elif alfa[0:] == ['o','n']:
         tokens.append((ON, string))
 
-      elif alfa == 'rb':
+      elif alfa[0:] == ['r','b']:
         tokens.append((RB, string))
 
-      elif alfa == 'sign':
-        tokens.append((SIGN, string))
+      elif alfa[0] == 's':
+        if alfa[1:] == ['i','g','n']:
+          tokens.append((SIGN, string))
+        
+        elif alfa[1:] == ['t','r','i','n','g']:
+          tokens.append((STRING, string))
 
-      elif alfa == 'gins':
+      elif alfa[0:] == ['g','i','n','s']:
         tokens.append((GINS, string))
 
-      elif alfa == 'nawed':
-        tokens.append((NAWED, string))
+      elif alfa[0] == 'n':
+        if alfa[1:] == ['a','w','e','d']:
+          tokens.append((NAWED, string))
+          
+        elif alfa[1:] == ['e','k','e','r']:
+          tokens.append((NEKER, string))
 
-      elif alfa == 'neker':
-        tokens.append((NEKER, string))
+        elif alfa[1:] == ['e','k','w','a','r']:
+          tokens.append((NEKWAR, string))
 
-      elif alfa == 'nekwar':
-        tokens.append((NEKWAR, string))
+      elif alfa[0] == 'f':
+        if alfa[1:] == ['l','o','a','t']:
+          tokens.append((FLOAT, string))
 
-      elif alfa == 'float':
-        tokens.append((FLOAT, string))
-
-      elif alfa == 'string':
-        tokens.append((STRING, string))
-
-      elif alfa == 'true':
+        elif alfa[1:] == ['a','l','s','e']:
+          tokens.append((FALSE, string))
+          
+      elif alfa[0:] == ['t','r','u','e']:
         tokens.append((TRUE, string))
-
-      elif alfa == 'false':
-        tokens.append((FALSE, string))
 
       else:
         tokens.append((IDENTIFICADOR, string))
@@ -267,7 +272,7 @@ def token(input_string):
   return tokens
 
 
-tokens = token('+ besary dsdsds    bool.kill1.flask/.2()')
+tokens = token('+ besary dsdsds igni int  bool.kill1.flask/.2()')
 for token_type, token_value in tokens:
   print(f"{token_type}: {token_value}")
 
