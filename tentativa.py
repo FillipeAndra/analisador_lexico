@@ -15,9 +15,9 @@ OPERADOR_MAIOR_IGUAL = 'OPERADOR MAIOR IGUAL QUE'
 OPERADOR_MENOR_IGUAL = 'OPERADOR MENOR IGUAL QUE'
 OPERADOR_DIFERENTE = 'OPERADOR DIFERENTE'
 OPERADOR_IGUAL = 'OPERADOR IGUAL'
-SETLE = 'SETLE'
-KILL = 'KILL'
-FLASK = 'FLASK'
+SETLE = '.SETLE'
+KILL = '.KILL'
+FLASK = '.FLASK'
 BESARY = 'BESARY'
 QUEN = 'QUEN'
 IGNI = 'IGNI'
@@ -39,7 +39,7 @@ NEKER = 'NEKER'
 NEKWAR = 'NEKWAR'
 INT = 'INT'
 FLOAT = 'FLOAT'
-BOOL = 'BOOL' 
+BOOL = 'BOOL'
 STRING = 'STRING'
 ABRE_PARENTESES = 'ABRE PARENTESES'
 FECHA_PARENTESES = 'FECHA PARENTESES'
@@ -51,204 +51,225 @@ FALSE = 'FALSE'
 
 # função que detecta os tokens e os transforma em string
 
+
 def token(input_string):
   tokens = []
   i = 0
+  index = 0
+
   while i < len(input_string):
     char = input_string[i]
+    def alfabeto(string):
+      alfa = list(string.strip(""))
+      if alfa[0] == 'b':
+        if alfa[1:] == ['e', 's', 'a', 'r', 'y']:
+          tokens.append((BESARY, string))
 
-    # detectores de número 
+        elif alfa[1:] == ['o', 'o', 'l']:
+          tokens.append((BOOL, string))
+
+        else:
+          tokens.append((IDENTIFICADOR, string))
+
+      elif alfa[0:] == ['q', 'u', 'e', 'n']:
+        tokens.append((QUEN, string))
+
+      elif alfa[0] == 'i':
+        if alfa[1:] == 'gni':
+          tokens.append((IGNI, string))
+
+        elif alfa[1:] == 'nt':
+          tokens.append((INT, string))
+
+      elif alfa[0] == 'aard':
+        tokens.append((AARD, string))
+
+      elif alfa == 'yrden':
+        tokens.append((YRDEN, string))
+
+      elif alfa == 'axii':
+        tokens.append((AXII, string))
+
+      elif alfa == 'alkemy':
+        tokens.append((ALKEMY, string))
+
+      elif alfa == 'poti':
+        tokens.append((POTI, string))
+
+      elif alfa == 'howi':
+        tokens.append((HOWI, string))
+
+      elif alfa == 'pop':
+        tokens.append((POP, string))
+
+      elif alfa == 'journal':
+        tokens.append((JOURNAL, string))
+
+      elif alfa == 'ab':
+        tokens.append((AB, string))
+
+      elif alfa == 'on':
+        tokens.append((ON, string))
+
+      elif alfa == 'rb':
+        tokens.append((RB, string))
+
+      elif alfa == 'sign':
+        tokens.append((SIGN, string))
+
+      elif alfa == 'gins':
+        tokens.append((GINS, string))
+
+      elif alfa == 'nawed':
+        tokens.append((NAWED, string))
+
+      elif alfa == 'neker':
+        tokens.append((NEKER, string))
+
+      elif alfa == 'nekwar':
+        tokens.append((NEKWAR, string))
+
+      elif alfa == 'float':
+        tokens.append((FLOAT, string))
+
+      elif alfa == 'string':
+        tokens.append((STRING, string))
+
+      elif alfa == 'true':
+        tokens.append((TRUE, string))
+
+      elif alfa == 'false':
+        tokens.append((FALSE, string))
+
+      else:
+        tokens.append((IDENTIFICADOR, string))
+    # detectores de número
+    
     if char.isdigit():
       j = i
-      while j <len(input_string) and (input_string[j].isdigit() or input_string[j] == '.'):
+      while j < len(input_string) and (input_string[j].isdigit()
+                                       or input_string[j] == '.'):
         j += 1
       num_str = input_string[i:j]
       if '.' in num_str:
         if num_str.count('.') == 1:
-          tokens.append((NUMERO_REAL,num_str))
+          tokens.append((NUMERO_REAL, num_str))
         else:
           raise ValueError("Número invalido: " + num_str)
       else:
-        tokens.append((NUMERO_INTEIRO,num_str))
-      i = j
+        tokens.append((NUMERO_INTEIRO, num_str))
+      i = j - 1
 
-    # operadores aritiméticos /lógicos 
-    if char == '=' and input_string[i+1] == '=':
-      tokens.append((OPERADOR_IGUAL,char))
-      i+=2
-
+    # operadores aritiméticos /lógicos
     elif char == '=':
-      tokens.append((OPERADOR_ATRIBUICAO,char))
-      i+=1
+      if input_string[i + 1] == '=':
+        tokens.append((OPERADOR_IGUAL, char))
+        i += 1
+
+      else:
+        tokens.append((OPERADOR_ATRIBUICAO, char))
 
     elif char == '+':
-      tokens.append((OPERADOR_SOMA,char))
-      i+=1
+      tokens.append((OPERADOR_SOMA, char))
 
     elif char == '-':
-      tokens.append((OPERADOR_SUBTRACAO,char))
-      i+=1
+      tokens.append((OPERADOR_SUBTRACAO, char))
 
     elif char == '/':
-      tokens.append((OPERADOR_DIVISAO,char))
-      i+=1
+      tokens.append((OPERADOR_DIVISAO, char))
 
     elif char == '%':
-      tokens.append((OPERADOR_RESTO,char))
-      i+=1
-
-    elif char == '*' and input_string[i+1] == '*':
-      tokens.append((OPERADOR_POTENCIACAO,char))
-      i += 2
+      tokens.append((OPERADOR_RESTO, char))
 
     elif char == '*':
-      tokens.append((OPERADOR_MULTIPLICACAO,char))
-      i+=1
+      if input_string[i + 1] == '*':
+        tokens.append((OPERADOR_POTENCIACAO, char))
+        i += 1
 
-    elif char == '>' and input_string[i+1] == '=':
-      tokens.append((OPERADOR_MAIOR_IGUAL,char))
-      i+=2
-
-    elif char == '<' and input_string[i+1] == '=':
-      tokens.append((OPERADOR_MENOR_IGUAL,char))
-      i+=2
+      else:
+        tokens.append((OPERADOR_MULTIPLICACAO, char))
 
     elif char == '>':
-      tokens.append((OPERADOR_MAIOR,char))
-      i+=1
+      if input_string[i + 1] == '=':
+        tokens.append((OPERADOR_MAIOR_IGUAL, char))
+        i += 1
+
+      else:
+        tokens.append((OPERADOR_MAIOR, char))
 
     elif char == '<':
-      tokens.append((OPERADOR_MENOR,char))
-      i+=1
+      if input_string[i + 1] == '=':
+        tokens.append((OPERADOR_MENOR_IGUAL, char))
+        i += 1
 
-    elif char == '!' and input_string[i+1] == '=':
-      tokens.append((OPERADOR_DIFERENTE,char))
-      i+=2
-    
+      else:
+        tokens.append((OPERADOR_MENOR, char))
+
+    elif char == '!' and input_string[i + 1] == '=':
+      tokens.append((OPERADOR_DIFERENTE, char))
+      i += 1
+
     elif char == '(':
-       tokens.append((ABRE_PARENTESES,char))
+      tokens.append((ABRE_PARENTESES, char))
 
     elif char == ')':
-       tokens.append((FECHA_PARENTESES,char))
+      tokens.append((FECHA_PARENTESES, char))
 
     elif char == '{':
-       tokens.append((ABRE_CHAVES))
+      tokens.append((ABRE_CHAVES))
 
     elif char == '}':
-       tokens.append((FECHA_CHAVES,char))
+      tokens.append((FECHA_CHAVES, char))
 
     elif char == '@':
-        tokens.append((ARROBA,char))
-
+      tokens.append((ARROBA, char))
     #detores de palavas/ identificadores
-    if char.isalpha():
-        k = i
-        while k <len(input_string) and (input_string[k].isalpha() or input_string[k] == '.'):
-            k += 1
-        alpha_str = input_string[i:j].lower()
-        if '_' in alpha_str:
-            tokens.append((IDENTIFICADOR,alpha_str))
 
-        elif '.' in alpha_str:
-           
-            if alpha_str.count('.') == 1 and alpha_str[0] == '.':
-                
-                if alpha_str == '.setle':
-                    tokens.append((SETLE,alpha_str))
+    
 
-                elif alpha_str == '.kill':
-                    tokens.append((KILL,alpha_str))
+    elif char.isalpha() or char == '.':
+      k = i
+      while k < len(input_string) and (input_string[k].isalpha()
+                                       or input_string[k] == '_'
+                                       or input_string[k] == '.'):
+        k += 1
+      alpha_str = list(input_string[i:k].lower().strip())
 
-                elif alpha_str == '.flask':
-                    tokens.append((FLASK,alpha_str))
-            else:
-                raise ValueError("Palavra reservada escrita errada: " + num_str)
-              
+      if '.' in alpha_str:
+        if alpha_str.count('.') == 1:
+          if alpha_str[0] != '.':
+            (alpha_str)
+            index = alpha_str.index('.')
+            palavra1 = ''.join(alpha_str[0:index])
+            alfabeto(palavra1)
+            k -= (index + 1)
 
-        elif alpha_str == 'besary':
-            tokens.append((BESARY,alpha_str))
+          elif alpha_str[0] == '.':
+            if alpha_str[0:] == ['.', 's', 'e', 't', 'l', 'e']:
+              tokens.append((SETLE, input_string[i:k]))
 
-        elif alpha_str == 'quen':
-           tokens.append((QUEN,alpha_str))
+            elif alpha_str[0:] == ['.', 'k', 'i', 'l', 'l']:
+              tokens.append((KILL, input_string[i:k]))
 
-        elif alpha_str == 'igni':
-           tokens.append((IGNI,alpha_str))
-
-        elif alpha_str == 'aard':
-           tokens.append((AARD,alpha_str))
-
-        elif alpha_str == 'yrden':
-           tokens.append((YRDEN,alpha_str))
-
-        elif alpha_str == 'axii':
-           tokens.append((AXII,alpha_str))
-
-        elif alpha_str == 'alkemy':
-           tokens.append((ALKEMY,alpha_str))
-
-        elif alpha_str == 'poti':
-           tokens.append((POTI,alpha_str))
-
-        elif alpha_str == 'howi':
-           tokens.append((HOWI,alpha_str))
-
-        elif alpha_str == 'pop':
-           tokens.append((POP,alpha_str))
-
-        elif alpha_str == 'journal':
-           tokens.append((JOURNAL,alpha_str))
-        
-        elif alpha_str == 'ab':
-            tokens.append((AB,alpha_str))
-
-        elif alpha_str == 'on':
-           tokens.append((ON,alpha_str))
-
-        elif alpha_str == 'rb':
-           tokens.append((RB,alpha_str))
-
-        elif alpha_str == 'sign':
-           tokens.append((SIGN,alpha_str))
-        
-        elif alpha_str == 'gins':
-           tokens.append((GINS,alpha_str))
-
-        elif alpha_str == 'nawed':
-           tokens.append((NAWED,alpha_str))
-
-        elif alpha_str == 'neker':
-           tokens.append((NEKER,alpha_str))
-        
-        elif alpha_str == 'nekwar':
-           tokens.append((NEKWAR,alpha_str))
-           
-        elif alpha_str == 'int':
-           tokens.append((INT,alpha_str))
-
-        elif alpha_str == 'float':
-           tokens.append((FLOAT,alpha_str))
-
-        elif alpha_str == 'string':
-           tokens.append((STRING,alpha_str))
-
-        elif alpha_str == 'bool':
-           tokens.append((BOOL,alpha_str))
-
-        elif alpha_str == 'true':
-           tokens.append((TRUE,alpha_str))
-
-        elif alpha_str == 'false':
-           tokens.append((FALSE,alpha_str))
-
+            elif alpha_str[0:] == ['.', 'f', 'l', 'a', 's', 'k']:
+              tokens.append((FLASK, input_string[i:k]))
         else:
-            tokens.append((IDENTIFICADOR,alpha_str))
+          raise ValueError("Palavra reservada escrita errada: " +
+                           input_string[i:k])
 
-        i = k
-    while i< len(input_string) and input_string[i].isspace():
-      i+=1
-  
+      else:
+        palavra = ''.join(alpha_str)
+        alfabeto(palavra)
+      
+      i = k -1
+      
+    i += 1
   return tokens
 
-tokens = token()
+
+tokens = token('+ besary dsdsds    bool.kill1.flask/.2()')
 for token_type, token_value in tokens:
-    print(f"{token_type}: {token_value}")
+  print(f"{token_type}: {token_value}")
+
+    
+    
