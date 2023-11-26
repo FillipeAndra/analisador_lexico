@@ -80,6 +80,9 @@ def token(input_string):
 
         elif alfa[1:] == ['n','t']:
           tokens.append((INT, string))
+          
+        else:
+          tokens.append((IDENTIFICADOR, string))
 
       elif alfa[0] == 'a':
         if alfa[1:] == ['a','r','d']:
@@ -94,6 +97,9 @@ def token(input_string):
         elif alfa[1:] == ['l','k','e','m','y']:
           tokens.append((ALKEMY, string))
           
+        else:
+          tokens.append((IDENTIFICADOR, string))
+          
       elif alfa[0:] == ['y','r','d','e','n']:
         tokens.append((YRDEN, string))
 
@@ -103,6 +109,9 @@ def token(input_string):
         
         elif alfa[1:] == ['o','p']:
           tokens.append((POP, string))
+          
+        else:
+          tokens.append((IDENTIFICADOR, string))
 
       elif alfa[0:] == ['h','o','w','i']:
         tokens.append((HOWI, string))
@@ -122,6 +131,9 @@ def token(input_string):
         
         elif alfa[1:] == ['t','r','i','n','g']:
           tokens.append((STRING, string))
+          
+        else:
+          tokens.append((IDENTIFICADOR, string))
 
       elif alfa[0:] == ['g','i','n','s']:
         tokens.append((GINS, string))
@@ -135,6 +147,9 @@ def token(input_string):
 
         elif alfa[1:] == ['e','k','w','a','r']:
           tokens.append((NEKWAR, string))
+          
+        else:
+          tokens.append((IDENTIFICADOR, string))
 
       elif alfa[0] == 'f':
         if alfa[1:] == ['l','o','a','t']:
@@ -142,6 +157,9 @@ def token(input_string):
 
         elif alfa[1:] == ['a','l','s','e']:
           tokens.append((FALSE, string))
+          
+        else:
+          tokens.append((IDENTIFICADOR, string))
           
       elif alfa[0:] == ['t','r','u','e']:
         tokens.append((TRUE, string))
@@ -266,13 +284,12 @@ def token(input_string):
         palavra = ''.join(alpha_str)
         alfabeto(palavra)
       
-      i = k -1
-      
+      i = k -1  
     i += 1
   return tokens
 
 
-tokens = token('+ besary dsdsds igni int  bool.kill1.flask/.2()')
+tokens = token('+ besary dsdsds igni int yrden  bool.kill1.flask/.2()')
 for token_type, token_value in tokens:
   print(f"{token_type}: {token_value}")
 
