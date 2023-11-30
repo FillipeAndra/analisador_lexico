@@ -50,6 +50,7 @@ TRUE = 'TRUE'
 FALSE = 'FALSE'
 PONTO = 'PONTO'
 PONTO_VIRGULA = 'PONTO E VIRGULA'
+VIRGULA = 'VÍRGULA'
 
 # função que detecta os tokens e os transforma em string
 
@@ -145,6 +146,9 @@ def token(input_string):
       
     elif char == ';':
       tokens.append((PONTO_VIRGULA, char))
+
+    elif char == ',':
+      tokens.append((VIRGULA, char))
       
     #detores de palavas/ identificadores
 
