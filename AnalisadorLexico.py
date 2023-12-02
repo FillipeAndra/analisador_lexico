@@ -69,7 +69,7 @@ def token(input_string):
         j += 1
       num_str = input_string[i:j]
       if '.' in num_str:
-        if num_str.count('.') == 1 and (input_string[j+1].isdigit()):
+        if num_str.count('.') == 1 and input_string[j-1].isdigit():
           tokens.append((NUMERO_REAL, num_str))
         else:
           raise ValueError("Número invalido: " + num_str)
@@ -154,7 +154,7 @@ def token(input_string):
 
     elif char.isalpha():
       k = i
-      while k < len(input_string) and (input_string[k].isalpha() or input_string[k] == '_'):
+      while k < len(input_string) and (input_string[k].isalpha() or input_string[k].isdigit()):
         k += 1
       alpha_str = list(input_string[i:k].lower().strip())
       
@@ -279,7 +279,7 @@ def token(input_string):
   return tokens
 
 
-tokens = token('+ besary dsdsds igni int yrden  bool.kill flask/ .2();')
+tokens = token('1.35 5+ besary dsdsdsDNS igni int yrden32.   bool.kill flask/ .2();')
 for token_type, token_value in tokens:
   print(f"{token_type}: {token_value}")
 
