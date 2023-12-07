@@ -1,0 +1,62 @@
+@ Definindo variaveis
+int memoria;
+int resultado;
+
+@ Programa principal
+journal ("Calculadora White Wolf");
+journal ("Operacoes disponiveis:");
+journal ("1 Adicao");
+journal ("2 Subtracao");
+journal ("3 Multiplicacao");
+journal ("4 Divisao");
+journal ("5 Limpar Memoria");
+journal ("6 Sair");
+
+int opcao;
+opcao = besary();
+
+quen (opcao != 6) {
+    journal ("Digite o primeiro numero:");
+    float a = besary();
+    journal "Digite o segundo numero:";
+    float b = besary();
+
+    quen (opcao == 1) {
+        resultado = a + b;
+        journal ("Resultado: " + resultado);
+    }
+    quen (opcao == 2) {
+        resultado = a - b;
+        journal ("Resultado: " + resultado);
+    }
+    quen (opcao == 3) {
+        resultado = a * b;
+        journal ("Resultado: " + resultado);
+    }
+    
+quen (opcao == 4) {
+        quen (b != 0) {
+            resultado = a / b;
+            journal ("Resultado: " + resultado);
+        } aard {
+            journal ("Erro: Divisao por zero.");
+        }
+    }
+    quen (opcao == 5) {
+        memoria = 0;
+        journal ("Memoria limpa.");
+    }
+    
+    journal ("Operacoes disponiveis:");
+    journal ("1 Adicao");
+    journal ("2 Subtracao");
+    journal ("3 Multiplicacao");
+    journal ("4 Divisao");
+    journal ("5 Limpar Memoria");
+    journal ("6 Sair");
+
+    opcao = besary();
+}
+
+journal ("Ate logo!");
+pop; @ Finalizacao do programa
